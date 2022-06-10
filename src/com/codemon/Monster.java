@@ -26,6 +26,10 @@ public class Monster implements Cloneable {
     return name;
   }
 
+  public int get_health() {
+    return health;
+  }
+
   public int get_attack() {
     return attack;
   }

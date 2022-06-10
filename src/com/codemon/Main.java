@@ -1,6 +1,7 @@
 package com.codemon;
 
 import java.util.*;
+import com.helper.*;
 
 /**
  * Main
@@ -10,6 +11,7 @@ public class Main {
   public static void main(String[] args) throws CloneNotSupportedException {
 
     Scanner input = new Scanner(System.in);
+
     int inputNum;
 
     Monster phpkachu = new Monster("Phpkachu", 120, 50);
@@ -25,13 +27,13 @@ public class Main {
     monstersList.add(bashtoise);
     monstersList.add(torterraform);
 
-    System.out.println("Welcome to CodeMon!\nPlease enter your name: ");
+    System.out.print("=====Welcome to CodeMon!=====\nPlease enter your name: ");
     String name = input.nextLine();
     Player player1 = new Player(name);
     for (int i = 0; i < 2; i++) {
       int num;
       do {
-        num = getRandomNumber(0, monstersList.size() - 1);
+        num = RandomNum.getRandomNumber(0, monstersList.size() - 1);
       } while (player1.get_card_names().contains(monstersList.get(num).get_name()));
       player1.add_card((Monster) monstersList.get(num).clone());
     }
@@ -40,7 +42,7 @@ public class Main {
     for (int i = 0; i < 2; i++) {
       int num;
       do {
-        num = getRandomNumber(0, monstersList.size() - 1);
+        num = RandomNum.getRandomNumber(0, monstersList.size() - 1);
       } while (player2.get_card_names().contains(monstersList.get(num).get_name()));
       player2.add_card((Monster) monstersList.get(num).clone());
     }
@@ -52,25 +54,6 @@ public class Main {
     Game game = new Game(playersList);
     game.start();
 
-    try {
-      inputNum = input.nextInt();
-    } catch (Exception e) {
-      System.out.println("Invalid input");
-    }
-
-    player1.play_turn(0, 1, player2);
-
-    player1.show();
-    player2.show();
   }
 
-  private static int getRandomNumber(int min, int max) {
-
-    if (min >= max) {
-      throw new IllegalArgumentException("max must be greater than min");
-    }
-
-    Random r = new Random();
-    return r.nextInt((max - min) + 1) + min;
-  }
 }

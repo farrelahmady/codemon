@@ -17,8 +17,8 @@ public class Player {
     this.cardNames.add(card.get_name());
   }
 
-  public Monster get_card(int index) {
-    return cards.get(index);
+  public ArrayList<Monster> get_card() {
+    return cards;
   }
 
   public ArrayList<String> get_card_names() {
@@ -37,9 +37,22 @@ public class Player {
   }
 
   public void play_turn(int own_card, int enemy_card, Player enemy) {
-    System.out.println("\n=====" + name + "'s turn=====");
     System.out.println(name + "'s " + cards.get(own_card).get_name() + " attacks " + enemy.get_name() + "'s "
-        + enemy.get_card(enemy_card).get_name() + " for " + cards.get(own_card).get_attack() + " damage!");
-    cards.get(own_card).attack(enemy.get_card(enemy_card));
+        + enemy.get_card().get(enemy_card).get_name() + " for " + cards.get(own_card).get_attack() + " damage!");
+    cards.get(own_card).attack(enemy.get_card().get(enemy_card));
+
+    if (this.cards.get(own_card).get_health() <= 0) {
+      System.out.println(name + "'s " + cards.get(own_card).get_name() + " has been defeated!");
+      cards.remove(own_card);
+      cardNames.remove(own_card);
+    }
+
+    if (enemy.get_card().get(enemy_card).get_health() <= 0) {
+      System.out
+          .println(enemy.get_name() + "'s " + enemy.get_card().get(enemy_card).get_name() + " has been defeated!");
+      enemy.get_card().remove(enemy_card);
+      enemy.get_card_names().remove(enemy_card);
+    }
   }
+
 }
