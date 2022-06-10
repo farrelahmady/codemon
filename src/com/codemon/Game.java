@@ -14,20 +14,18 @@ public class Game {
     }
   }
 
-  void start() {
+  public void start() {
 
     System.out.println("=====GAME START=====");
     for (Player player : players) {
       player.show();
     }
 
-    while (players.get(0).get_card().size() > 0 && players.get(1).get_card().size() > 0) {
-      turn();
-    }
+    turn();
 
   }
 
-  void turn() {
+  private void turn() {
     int index = RandomNum.getRandomNumber(0, players.size() - 1);
     int cardChosen;
     int targetChosen;
@@ -61,8 +59,17 @@ public class Game {
       Thread.currentThread().interrupt();
     }
 
-    for (Player player : players) {
-      player.show();
+    for (int i = 0; i < players.size(); i++) {
+      for (Monster monster : players.get(i).get_card()) {
+        monster.applyElementalEffect();
+      }
+
+      players.get(i).show();
+
+      if (players.get(i).get_card().size() == 0) {
+        System.out.println("\n" + players.get(i).get_name() + " has no more cards!\n");
+        players.remove(i);
+      }
     }
 
     try {
@@ -72,6 +79,14 @@ public class Game {
     }
 
     System.out.println("\n=========END TURN=========\n");
+
+    if (players.size() == 1) {
+      System.out.println("\n" + players.get(0).get_name() + " wins!\n");
+    } else if (players.size() == 0) {
+      System.out.println("\nIt's a draw!\n");
+    } else {
+      turn();
+    }
 
   }
 

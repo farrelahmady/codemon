@@ -19,7 +19,10 @@ public class Monster implements Cloneable {
   }
 
   void show() {
-    System.out.println("Name: " + name + "\t\tHealth: " + health + "\t\tAttack: " + attack);
+    String text = "Name: " + name;
+    text += this.status != null ? "[BURNT]" : "";
+    text += "\tHealth: " + health + "\tAttack: " + attack;
+    System.out.println(text);
   }
 
   public String get_name() {
@@ -42,4 +45,21 @@ public class Monster implements Cloneable {
   void takeDamage(int damage) {
     health -= damage;
   }
+
+  void takeElementalAttack(String status, int turn_remaining, int over_time_damage) {
+    this.status = status;
+    this.turn_remaining = turn_remaining;
+    this.over_time_damage = over_time_damage;
+  }
+
+  void applyElementalEffect() {
+    if (status == "burn") {
+      takeDamage(over_time_damage);
+      turn_remaining--;
+      if (turn_remaining == 0) {
+        status = "";
+      }
+    }
+  }
+
 }

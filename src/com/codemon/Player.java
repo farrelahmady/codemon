@@ -30,7 +30,7 @@ public class Player {
   }
 
   public void show() {
-    System.out.println("\n=====" + name + "=====");
+    System.out.println("\n---------" + name + "---------");
     for (int i = 0; i < cards.size(); i++) {
       cards.get(i).show();
     }

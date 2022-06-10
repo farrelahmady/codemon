@@ -14,11 +14,11 @@ public class Main {
 
     int inputNum;
 
-    Monster phpkachu = new Monster("Phpkachu", 120, 50);
+    Monster phpkachu = new FireMonster("Phpkachu", 120, 50);
     Monster sqlrtle = new Monster("Sqlrtle", 180, 20);
-    Monster cppmander = new Monster("cppmander", 100, 80);
+    Monster cppmander = new FireMonster("cppmander", 100, 80);
     Monster bashtoise = new Monster("bashtoise", 120, 60);
-    Monster torterraform = new Monster("torterraform", 200, 10);
+    Monster torterraform = new Monster("torterraform", 200, 70);
 
     ArrayList<Monster> monstersList = new ArrayList<Monster>();
     monstersList.add(phpkachu);
